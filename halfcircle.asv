@@ -45,8 +45,8 @@ for i=1:length(sspace)
         P_z_derivative(i) = radius * (pi/2) * sin(s * pi/2);
         P_x_derivative(i) = -radius * (pi/2) * cos(s * pi/2);
         
-        Rot = RotBrushStart .* exp(log10(RotBrushStart' * RotBrushEnd) * s);
-        disp(Rot)
+        Rot = RotBrushStart
+
 
         P(i,:) =  [P_z(i) P_x(i) 0.0] * RotatePath;
     elseif s <= alpha && s>1
