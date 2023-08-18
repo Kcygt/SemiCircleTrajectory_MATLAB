@@ -12,29 +12,9 @@ P_x = zeros(1,length(sspace));
 P_z_derivative = zeros(1,length(sspace));
 P_x_derivative = zeros(1,length(sspace));
 
-% 30 degrees Rotation
-RotatePath = [  0.8660254,  0.5000000,  0.0000000;
-               -0.5000000,  0.8660254,  0.0000000;
-                0.0000000,  0.0000000,  1.0000000 ];
-
-RotBrushStart = [  1.0000000,  0.0000000,  0.0000000;
-                   0.0000000,  1.0000000,  0.0000000;
-                   0.0000000,  0.0000000,  1.0000000 ];
-
-RotBrushEnd = [  0.1542515,  0.0000000, -0.9880316;
-                 0.0000000,  1.0000000,  0.0000000;
-                 0.9880316,  0.0000000,  0.1542515 ];
-
-% 45 degree Rotation
-% R = [  0.7071068,  0.7071068,  0.0000000;
-%   -0.7071068,  0.7071068,  0.0000000;
-%    0.0000000,  0.0000000,  1.0000000 ];
+[Rx,Ry,Rz] = rotation(pi/3);
 
 
-% 90 degrees Rotation
-% R = [ -0.9997531, -0.0222195,  0.0000000;
-%    0.0222195, -0.9997531,  0.0000000;
-%    0.0000000,  0.0000000,  1.0000000 ];
 for i=1:length(sspace)
     s=sspace(i);
 
@@ -44,11 +24,9 @@ for i=1:length(sspace)
         P_x(i) = -radius * sin(s*pi/2);
         P_z_derivative(i) = radius * (pi/2) * sin(s * pi/2);
         P_x_derivative(i) = -radius * (pi/2) * cos(s * pi/2);
-        
-        Rot = RotBrushStart .* exp(log10(RotBrushStart' * RotBrushEnd) * s);
-        disp(Rot)
 
-        P(i,:) =  [P_z(i) P_x(i) 0.0] * RotatePath;
+
+        P(i,:) =  Ry * [P_x(i) 0.0 P_z(i) ]' ;
     elseif s <= alpha && s>1
         % Calculate the coordinates of the straight line segment
         P_z(i) = (s-1) * (radius * pi) / 2;
@@ -56,14 +34,13 @@ for i=1:length(sspace)
 
         P_z_derivative(1,i) = radius * pi / 2;
         P_x_derivative(1,i) = 0;
-        P(i,:) =  [P_z(i) P_x(i) 0.0] * RotatePath;
-
+        P(i,:) =  Ry * [P_x(i) 0.0 P_z(i) ]' ;
     else
         P_z(i) = radius * sin((s-alpha) * pi/2) + line_length;
         P_x(i) = -radius * cos((s-alpha) * pi/2);
         P_z_derivative(i) = radius * pi/2 * cos((s-alpha) * pi/2);
         P_x_derivative(i) = radius * pi/2 * sin((s-alpha) * pi/2);
-        P(i,:) =  [P_z(i) P_x(i) 0.0] * RotatePath;
+        P(i,:) =  Ry * [P_x(i) 0.0 P_z(i) ]' ;
     end
 
 end
@@ -101,12 +78,12 @@ end
 
 
 
-figure(2)
+figure(1)
 hold on
 grid on
-plot(P(:,1),P(:,2), 'LineWidth', 2.0)
-xlabel('X direction (cm)')
-ylabel('Z direction (cm)')
+plot(P(:,3),P(:,1), 'LineWidth', 2.0)
+xlabel('Z direction (m)')
+ylabel('X direction (m)')
 title('Path')
 %
 % writematrix(P_z', "P_x.txt");
@@ -121,24 +98,24 @@ title('Path')
 %
 %
 %
-figure(1)
-plot(P_x, 'LineWidth', 2.0)
-title('Position')
-xlabel('S')
-ylabel('Position (cm)')
-legend('X direction','Z direction')
-
-
-figure(2)
-hold on
-grid on
-plot(P_z,P_x, 'LineWidth', 2.0)
-xlabel('X direction (cm)')
-ylabel('Z direction (cm)')
-title('Path')
-
-figure(3)
-hold on
-grid on
-plot(P_x_derivative,P_z_derivative)
-
+% figure(1)
+% plot(P_x, 'LineWidth', 2.0)
+% title('Position')
+% xlabel('S')
+% ylabel('Position (cm)')
+% legend('X direction','Z direction')
+%
+%
+% figure(2)
+% hold on
+% grid on
+% plot(P_z,P_x, 'LineWidth', 2.0)
+% xlabel('X direction (cm)')
+% ylabel('Z direction (cm)')
+% title('Path')
+%
+% figure(3)
+% hold on
+% grid on
+% plot(P_x_derivative,P_z_derivative)
+%
