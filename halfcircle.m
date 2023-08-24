@@ -12,7 +12,7 @@ P_x = zeros(1,length(sspace));
 P_z_derivative = zeros(1,length(sspace));
 P_x_derivative = zeros(1,length(sspace));
 
-[Rx,Ry,Rz] = rotation(pi/3);
+[Rx,Ry,Rz] = rotation(0);
 
 
 for i=1:length(sspace)
