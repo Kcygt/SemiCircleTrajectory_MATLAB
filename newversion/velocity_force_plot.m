@@ -15,7 +15,7 @@ plot(mean(data1.FC50.T8.xdAct(T8,1)), mean(data1.FC50.T8.Force(T8,3)),'square')
 plot(mean(data1.FC50.T10.xdAct(T10,1)), mean(data1.FC50.T10.Force(T10,3)),'p')
 xlabel('Average Velocity(m/s)')
 ylabel('Average Force(N)')
-title('FLAT surface, Radius = 5cm')
+title('Iteration 1, Radius = 5cm')
 
 subplot(312)
 hold on; grid on;
@@ -26,7 +26,7 @@ plot(mean(data1.FC55.T8.xdAct(T8,1)), mean(data1.FC55.T8.Force(T8,3)),'square')
 plot(mean(data1.FC55.T10.xdAct(T10,1)), mean(data.FC55.T10.Force(T10,3)),'p')
 xlabel('Average Velocity(m/s)')
 ylabel('Average Force(N)')
-title('FLAT surface, Radius = 5.5 cm')
+title('Iteration 1, Radius = 5.5 cm')
 
 subplot(313)
 hold on; grid on;
@@ -37,7 +37,7 @@ plot(mean(data1.FC60.T8.xdAct(T8,1)), mean(data1.FC60.T8.Force(T8,3)),'square')
 plot(mean(data1.FC60.T10.xdAct(T10,1)), mean(data1.FC60.T10.Force(T10,3)),'p')
 xlabel('Average Velocity(m/s)')
 ylabel('Average Force(N)')
-title('FLAT surface, Radius = 6 cm')
+title('Iteration 1, Radius = 6 cm')
 %%%%%%%%%
 figure(2)
 subplot(311)
@@ -49,7 +49,7 @@ plot(mean(data2.FC50.T8.xdAct(T8,1)), mean(data2.FC50.T8.Force(T8,3)),'square')
 plot(mean(data2.FC50.T10.xdAct(T10,1)), mean(data2.FC50.T10.Force(T10,3)),'p')
 xlabel('Average Velocity(m/s)')
 ylabel('Average Force(N)')
-title('FLAT surface, Radius = 5cm')
+title('Iteration 2, Radius = 5cm')
 
 subplot(312)
 hold on; grid on;
@@ -60,7 +60,7 @@ plot(mean(data2.FC55.T8.xdAct(T8,1)), mean(data2.FC55.T8.Force(T8,3)),'square')
 plot(mean(data2.FC55.T10.xdAct(T10,1)), mean(data2.FC55.T10.Force(T10,3)),'p')
 xlabel('Average Velocity(m/s)')
 ylabel('Average Force(N)')
-title('FLAT surface, Radius = 5.5 cm')
+title('Iteration 2, Radius = 5.5 cm')
 
 subplot(313)
 hold on; grid on;
@@ -71,7 +71,7 @@ plot(mean(data2.FC60.T8.xdAct(T8,1)), mean(data2.FC60.T8.Force(T8,3)),'square')
 plot(mean(data2.FC60.T10.xdAct(T10,1)), mean(data2.FC60.T10.Force(T10,3)),'p')
 xlabel('Average Velocity(m/s)')
 ylabel('Average Force(N)')
-title('FLAT surface, Radius = 6 cm')
+title('Iteration 2, Radius = 6 cm')
 
 %%%%%%
 figure(3)
@@ -84,7 +84,7 @@ plot(mean(data3.FC50.T8.xdAct(T8,1)), mean(data3.FC50.T8.Force(T8,3)),'square')
 plot(mean(data3.FC50.T10.xdAct(T10,1)), mean(data3.FC50.T10.Force(T10,3)),'p')
 xlabel('Average Velocity(m/s)')
 ylabel('Average Force(N)')
-title('FLAT surface, Radius = 5cm')
+title('Iteration 3, Radius = 5cm')
 
 subplot(312)
 hold on; grid on;
@@ -95,7 +95,7 @@ plot(mean(data3.FC55.T8.xdAct(T8,1)), mean(data3.FC55.T8.Force(T8,3)),'square')
 plot(mean(data3.FC55.T10.xdAct(T10,1)), mean(data3.FC55.T10.Force(T10,3)),'p')
 xlabel('Average Velocity(m/s)')
 ylabel('Average Force(N)')
-title('FLAT surface, Radius = 5.5 cm')
+title('Iteration 3, Radius = 5.5 cm')
 
 subplot(313)
 hold on; grid on;
@@ -106,7 +106,7 @@ plot(mean(data3.FC60.T8.xdAct(T8,1)), mean(data3.FC60.T8.Force(T8,3)),'square')
 plot(mean(data3.FC60.T10.xdAct(T10,1)), mean(data3.FC60.T10.Force(T10,3)),'p')
 xlabel('Average Velocity(m/s)')
 ylabel('Average Force(N)')
-title('FLAT surface, Radius = 6 cm')
+title('Iteration 3, Radius = 6 cm')
 
 
 % figure(4)
@@ -155,7 +155,7 @@ title('FLAT surface, Radius = 6 cm')
 % % legend('time=3','time=4','time=5','time=8','time=10')
 % xlabel('Average Velocity(m/s)')
 % ylabel('Standart Deviation Force(N)')
-% title('FLAT surface, Radius = 5cm')
+% title('Iteration 1, Radius = 5cm')
 % 
 % figure(8)
 % hold on; grid on;
@@ -167,7 +167,7 @@ title('FLAT surface, Radius = 6 cm')
 % % legend('time=3','time=4','time=5','time=8','time=10')
 % xlabel('Average Velocity(m/s)')
 % ylabel('Standart Deviation Force(N)')
-% title('FLAT surface, Radius = 5.5 cm')
+% title('Iteration 1, Radius = 5.5 cm')
 % 
 % figure(9)
 % hold on; grid on;
@@ -179,7 +179,7 @@ title('FLAT surface, Radius = 6 cm')
 % % legend('time=3','time=4','time=5','time=8','time=10')
 % xlabel('Average Velocity(m/s)')
 % ylabel('Standart Deviation Force(N)')
-% title('FLAT surface, Radius = 6 cm')
+% title('Iteration 1, Radius = 6 cm')
 % 
 % 
 % figure(10)
