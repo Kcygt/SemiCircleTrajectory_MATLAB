@@ -1,0 +1,12 @@
+cpts = [0 1 2 3 4 5 6 7; ...
+        0 -0.20 -.38 -0.54 -0.68 -0.80 -0.90 -0.98];
+tpts = [0 5];
+tvec = 0:0.01:5;
+[q, qd, qdd, pp] = bsplinepolytraj(cpts,tpts,tvec);
+figure
+plot(cpts(1,:),cpts(2,:),'xb-')
+hold all
+plot(q(1,:), q(2,:))
+xlabel('X')
+ylabel('Y')
+hold off
