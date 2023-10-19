@@ -1,4 +1,3 @@
-
 close all;
 T3 = 1000:1200;
 T4 = 1200:1600;
@@ -24,7 +23,7 @@ plot(mean(data1.FC55.T3.xdAct(T3,1)), mean(data1.FC55.T3.Force(T3,3)),'*')
 plot(mean(data1.FC55.T4.xdAct(T4,1)), mean(data1.FC55.T4.Force(T4,3)),'+')
 plot(mean(data1.FC55.T6.xdAct(T6,1)), mean(data1.FC55.T6.Force(T6,3)),'^')
 plot(mean(data1.FC55.T8.xdAct(T8,1)), mean(data1.FC55.T8.Force(T8,3)),'square')
-plot(mean(data1.FC55.T10.xdAct(T10,1)), mean(data.FC55.T10.Force(T10,3)),'p')
+plot(mean(data1.FC55.T10.xdAct(T10,1)), mean(data1.FC55.T10.Force(T10,3)),'p')
 xlabel('Average Velocity(m/s)')
 ylabel('Average Force(N)')
 title('Iteration 1, Radius = 5.5 cm')
@@ -130,7 +129,7 @@ plot(mean(data1.RC55.T3.xdAct(T3,1)), mean(data1.RC55.T3.Force(T3,3)),'*')
 plot(mean(data1.RC55.T4.xdAct(T4,1)), mean(data1.RC55.T4.Force(T4,3)),'+')
 plot(mean(data1.RC55.T6.xdAct(T6,1)), mean(data1.RC55.T6.Force(T6,3)),'^')
 plot(mean(data1.RC55.T8.xdAct(T8,1)), mean(data1.RC55.T8.Force(T8,3)),'square')
-plot(mean(data1.RC55.T10.xdAct(T10,1)), mean(data.RC55.T10.Force(T10,3)),'p')
+plot(mean(data1.RC55.T10.xdAct(T10,1)), mean(data1.RC55.T10.Force(T10,3)),'p')
 xlabel('Average Velocity(m/s)')
 ylabel('Average Force(N)')
 title('Iteration 1, Radius = 5.5 cm')
