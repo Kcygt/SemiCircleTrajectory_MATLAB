@@ -1,6 +1,6 @@
 %%%%% SICILIANO DATA ANALYSIS
 close all
-addpath 'C:\Users\KCY\OneDrive - University of Reading\Documents\GitHub\SemiCircleTrajectory_MATLAB\newversion\SicilianoData'
+addpath 'C:\Users\zs839395\Documents\GitHub\SemiCircleTrajectory_MATLAB\20102023_data'
 
 data = struct();
 
@@ -16,9 +16,7 @@ data.Force = load('wrench.csv');
 data.xDes = zeros(length(data.Time), 3);
 data.xdDes = load('desiredEndEffectorVelocity.csv');
 data.xAct = zeros(length(data.Time), 3);
-data.xdAct = zeros(length(data.Time), 3);
-data.xRec = zeros(length(data.Time), 3);
-data.xdRec = zeros(length(data.Time), 3);
+data.xdAct = zeros(length(data.Time), 6);
 
 
 data.SicilianoT = load('SicilianoT_log.csv');
@@ -32,11 +30,12 @@ for i = 1:length(data.xDes)
 
    [data.xDes(i, :), ~] = forwardKinematics(data.DesiredJointPosition(i,:));
    [data.xAct(i, :), ~] = forwardKinematics(data.JointPosition(i,:));
+   data.xdAct(i, :) = Jacobian(data.JointPosition(i,:)) * data.DesiredJointVelocity(i,:)';
 
 end
 q0 = deg2rad([0.0 270.0 0.0 138.0 0.0 50.0 0.0]);
 x0 = forwardKinematics(q0);
-radius = 0.05;
+radius = 0.055;
 %%% PLOTTING
 
 figure(1)
@@ -44,6 +43,29 @@ hold on; grid on;
 
 plot(data.xDes(:,3),-data.xDes(:,1))
 plot(data.xAct(:,3),-data.xAct(:,1))
-plot(data.SicilianoT(:,3),-data.SicilianoT(:,1))
-plot(-data.pathx(:,1) + radius + x0(3),data.pathx(:,3))
-legend('Desired from hypodrome output','Actual from KINOVA','Siciliano','Desired input to Hypodrome')
+legend('Desired from hypodrome output','Actual from KINOVA')
+
+
+figure(2)
+hold on; grid on;
+plot(data.Time,data.xdDes(:,1))
+plot(data.Time,data.xdAct(:,1))
+ylabel('Velocity (cm/sn)')
+xlabel('Time')
+title('Cartesian Velocity')
+legend('Desired','Actual')
+
+figure(3)
+hold on; grid on;
+plot(data.Time,data.DesiredJointVelocity(:,2))
+plot(data.Time,data.JointVelocity(:,2))
+title('Joint Velocity')
+legend('Desired Joint Velocity','Actual Joint Velocity')
+
+figure(4)
+hold on; grid on;
+plot(data.Time,data.DesiredJointPosition(:,4))
+plot(data.Time,data.JointPosition(:,4))
+title('Joint Position')
+legend('Desired Joint Position','Actual Joint Position')
+

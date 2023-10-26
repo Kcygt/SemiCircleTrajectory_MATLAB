@@ -39,8 +39,8 @@ radius = 0.055;
 figure(1)
 hold on; grid on;
 
-plot(data.xDes(:,3),-data.xDes(:,1))
-plot(data.xAct(:,3),-data.xAct(:,1))
-plot(data.SicilianoT(:,3),-data.SicilianoT(:,1))
+plot(data.xDes(:,3),-data.xDes(:,1),'.-')
+plot(data.xAct(:,3),-data.xAct(:,1),'.-')
+plot(data.SicilianoT(:,3),-data.SicilianoT(:,1),'.-')
 plot(-data.pathx(:,1) + radius + x0(3),data.pathx(:,3)-x0(1))
 legend('Desired from hypodrome output','Actual from KINOVA','Siciliano','Hypodrome function ')
