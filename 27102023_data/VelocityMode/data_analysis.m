@@ -2,6 +2,10 @@
 close all
 dataVelocity = struct();
 
+%%%%%%%%%%%%
+%%% Time = 1.5 sec 
+%%%%%%%%%%%%
+
 dataVelocity.T1_5.I1.DesiredJointVelocity = load('Flat_R0.050000_T1.500000_1_desiredJointVelocity.csv');
 dataVelocity.T1_5.I1.DesiredJointPosition = load('Flat_R0.050000_T1.500000_1_desiredJointPosition.csv');
 
@@ -23,8 +27,6 @@ for i = 1:length(dataVelocity.T1_5.I1.xDes)
 
 end
 
-
-%%%%%%%%%%%%
 dataVelocity.T1_5.I2.DesiredJointVelocity = load('Flat_R0.050000_T1.500000_2_desiredJointVelocity.csv');
 dataVelocity.T1_5.I2.DesiredJointPosition = load('Flat_R0.050000_T1.500000_2_desiredJointPosition.csv');
 
@@ -48,7 +50,6 @@ end
 
 
 
-%%%%%%%%%%%%%
 dataVelocity.T1_5.I3.DesiredJointVelocity = load('Flat_R0.050000_T1.500000_3_desiredJointVelocity.csv');
 dataVelocity.T1_5.I3.DesiredJointPosition = load('Flat_R0.050000_T1.500000_3_desiredJointPosition.csv');
 
@@ -71,21 +72,9 @@ for i = 1:length(dataVelocity.T1_5.I3.xDes)
 end
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+%%%%%%%%%%%%
+%%% Time = 2 secs
+%%%%%%%%%%%%
 
 dataVelocity.T2.I1.DesiredJointVelocity = load('Flat_R0.050000_T2.000000_1_desiredJointVelocity.csv');
 dataVelocity.T2.I1.DesiredJointPosition = load('Flat_R0.050000_T2.000000_1_desiredJointPosition.csv');
@@ -109,7 +98,7 @@ for i = 1:length(dataVelocity.T2.I1.xDes)
 end
 
 
-%%%%%%%%%%%%
+
 dataVelocity.T2.I2.DesiredJointVelocity = load('Flat_R0.050000_T2.000000_2_desiredJointVelocity.csv');
 dataVelocity.T2.I2.DesiredJointPosition = load('Flat_R0.050000_T2.000000_2_desiredJointPosition.csv');
 
@@ -154,20 +143,9 @@ for i = 1:length(dataVelocity.T2.I3.xDes)
 end
 
 
-
-
-
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% figure(1)
-% hold on; grid on;
-% plot(dataVelocity.T1_5.I1.xDes(:,3),-dataVelocity.T1_5.I1.xDes(:,1))
-% plot(dataVelocity.T1_5.I1.xAct(:,3),-dataVelocity.T1_5.I1.xAct(:,1))
-% legend('Desired from hypodrome output','Actual from KINOVA')
+figure(1)
+hold on; grid on;
+plot(dataVelocity.T2.I1.xDes(:,3),-dataVelocity.T2.I1.xDes(:,1))
+plot(dataVelocity.T2.I1.xAct(:,3),-dataVelocity.T2.I1.xAct(:,1))
+legend('Desired trajectory','Actual trajectory')
 

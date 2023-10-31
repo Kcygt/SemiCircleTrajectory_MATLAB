@@ -1,71 +1,58 @@
 %%%%% SICILIANO DATA ANALYSIS
 close all
-addpath 'C:\Users\zs839395\Documents\GitHub\SemiCircleTrajectory_MATLAB\20102023_data'
+dataTorqueVel = struct();
 
-dataTorque = struct();
+dataTorqueVel.DesiredJointVelocity = load('desiredJointVelocity.csv');
+dataTorqueVel.DesiredJointPosition = load('desiredJointPosition.csv');
 
-dataTorque.DesiredJointVelocity = load('desiredJointVelocity.csv');
-dataTorque.DesiredJointPosition = load('desiredJointPosition.csv');
+dataTorqueVel.JointPosition = load('jointPosition.csv');
+dataTorqueVel.JointVelocity = load('jointVelocity.csv');
 
-dataTorque.JointPosition = load('jointPosition.csv');
-dataTorque.JointVelocity = load('jointVelocity.csv');
+dataTorqueVel.Time = load('simulationTime.csv');
+dataTorqueVel.Force = load('wrench.csv');
 
-dataTorque.Time = load('simulationTime.csv');
-dataTorque.Force = load('wrench.csv');
-
-dataTorque.xDes = zeros(length(dataTorque.Time), 3);
-dataTorque.xdDes = load('desiredEndEffectorVelocity.csv');
-dataTorque.xAct = zeros(length(dataTorque.Time), 3);
-dataTorque.xdAct = zeros(length(dataTorque.Time), 6);
+dataTorqueVel.xDes = zeros(length(dataTorqueVel.Time), 3);
+dataTorqueVel.xdDes = load('desiredEndEffectorVelocity.csv');
+dataTorqueVel.xAct = zeros(length(dataTorqueVel.Time), 3);
+dataTorqueVel.xdAct = zeros(length(dataTorqueVel.Time), 6);
 
 
-dataTorque.SicilianoT = load('SicilianoT_log.csv');
-dataTorque.pathx = load('pathx.csv');
+dataTorqueVel.SicilianoT = load('SicilianoT_log.csv');
+dataTorqueVel.pathx = load('pathx.csv');
 
 
 
 
 
-for i = 1:length(dataTorque.xDes)
+for i = 1:length(dataTorqueVel.xDes)
 
-   [dataTorque.xDes(i, :), ~] = forwardKinematics(dataTorque.DesiredJointPosition(i,:));
-   [dataTorque.xAct(i, :), ~] = forwardKinematics(dataTorque.JointPosition(i,:));
-   dataTorque.xdAct(i, :) = Jacobian(dataTorque.JointPosition(i,:)) * dataTorque.DesiredJointVelocity(i,:)';
+   [dataTorqueVel.xDes(i, :), ~] = forwardKinematics(dataTorqueVel.DesiredJointPosition(i,:));
+   [dataTorqueVel.xAct(i, :), ~] = forwardKinematics(dataTorqueVel.JointPosition(i,:));
 
 end
 q0 = deg2rad([0.0 270.0 0.0 138.0 0.0 50.0 0.0]);
 x0 = forwardKinematics(q0);
 radius = 0.055;
-%%% PLOTTING
 
+
+%%% PLOTTING
 figure(1)
 hold on; grid on;
-
-plot(dataTorque.xDes(:,3),-dataTorque.xDes(:,1))
-plot(dataTorque.xAct(:,3),-dataTorque.xAct(:,1))
+plot(dataTorqueVel.xDes(:,3),-dataTorqueVel.xDes(:,1))
+plot(dataTorqueVel.xAct(:,3),-dataTorqueVel.xAct(:,1))
 legend('Desired from hypodrome output','Actual from KINOVA')
-
 
 figure(2)
 hold on; grid on;
-plot(dataTorque.Time,dataTorque.xdDes(:,1))
-plot(dataTorque.Time,dataTorque.xdAct(:,1))
-ylabel('Velocity (cm/sn)')
-xlabel('Time')
-title('Cartesian Velocity')
-legend('Desired','Actual')
-
-figure(3)
-hold on; grid on;
-plot(dataTorque.Time,dataTorque.DesiredJointVelocity(:,2))
-plot(dataTorque.Time,dataTorque.JointVelocity(:,2))
+plot(dataTorqueVel.Time,dataTorqueVel.DesiredJointVelocity(:,2))
+plot(dataTorqueVel.Time,dataTorqueVel.JointVelocity(:,2))
 title('Joint Velocity')
 legend('Desired Joint Velocity','Actual Joint Velocity')
 
-figure(4)
+figure(3)
 hold on; grid on;
-plot(dataTorque.Time,dataTorque.DesiredJointPosition(:,4))
-plot(dataTorque.Time,dataTorque.JointPosition(:,4))
+plot(dataTorqueVel.Time,dataTorqueVel.DesiredJointPosition(:,4))
+plot(dataTorqueVel.Time,dataTorqueVel.JointPosition(:,4))
 title('Joint Position')
 legend('Desired Joint Position','Actual Joint Position')
 
