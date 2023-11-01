@@ -35,7 +35,7 @@ for i = 1:length(dataVel.xDes)
 end
 q0 = deg2rad([0.0 270.0 0.0 138.0 0.0 50.0 0.0]);
 x0 = forwardKinematics(q0);
-radius = 0.055;
+% radius = 0.055;
 %%% PLOTTING
 
 figure(1)

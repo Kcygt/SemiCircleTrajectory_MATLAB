@@ -35,14 +35,14 @@ for i = 1:length(dataVel.xDes)
 end
 q0 = deg2rad([0.0 270.0 0.0 138.0 0.0 50.0 0.0]);
 x0 = forwardKinematics(q0);
-radius = 0.055;
+% radius = 0.055;
 %%% PLOTTING
 
 figure(1)
 hold on; grid on;
 
-plot(dataVel.xDes(:,3),-dataVel.xDes(:,1))
-plot(dataVel.xAct(:,3),-dataVel.xAct(:,1))
+plot(dataVel.xDes(:,3),-dataVel.xDes(:,1),'.')
+plot(dataVel.xAct(:,3),-dataVel.xAct(:,1),'.')
 legend('Desired from hypodrome output','Actual from KINOVA')
 
 
@@ -57,15 +57,29 @@ legend('Desired','Actual')
 
 figure(3)
 hold on; grid on;
-plot(dataVel.Time,dataVel.DesiredJointVelocity(:,2))
-plot(dataVel.Time,dataVel.JointVelocity(:,2))
+plot(dataVel.Time,dataVel.DesiredJointVelocity(:,[2 4 6]))
+plot(dataVel.Time,dataVel.JointVelocity(:,[2 4 6]))
 title('Joint Velocity')
 legend('Desired Joint Velocity','Actual Joint Velocity')
 
 figure(4)
 hold on; grid on;
-plot(dataVel.Time,dataVel.DesiredJointPosition(:,4))
-plot(dataVel.Time,dataVel.JointPosition(:,4))
+plot(dataVel.Time,dataVel.DesiredJointPosition(:,[2 4 6]))
+plot(dataVel.Time,dataVel.JointPosition(:,[2 4 6]))
 title('Joint Position')
 legend('Desired Joint Position','Actual Joint Position')
 
+
+figure(5)
+hold on; grid on;
+plot(data3.FC50.T10.Time,data3.FC50.T10.DesiredJointVelocity(:,[2 4 6]))
+plot(data3.FC50.T10.Time,data3.FC50.T10.JointVelocity(:,[2 4 6]))
+title('Joint Velocity')
+legend('Desired Joint Velocity','Actual Joint Velocity')
+
+figure(6)
+hold on; grid on;
+plot(data3.FC50.T10.Time,data3.FC50.T10.DesiredJointPosition(:,[2 4 6]))
+plot(data3.FC50.T10.Time,data3.FC50.T10.JointPosition(:,[2 4 6]))
+title('Joint Position')
+legend('Desired Joint Position','Actual Joint Position')
