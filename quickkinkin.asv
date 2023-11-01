@@ -1,6 +1,0 @@
-x=function(q)
-%
-l=[];
-
-th=cumsum(q,2)
-cos(l)
