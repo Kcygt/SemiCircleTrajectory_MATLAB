@@ -11,7 +11,7 @@ rootdir = ['FCat_R0.050000/Flat_R0.050000_T%.6f_3',...
 timeFrames = [10, 8, 6, 4, 3];
 numFrames = length(timeFrames);
 
-data3 = struct();
+data = struct();
 for directory = 1:8
     for index = 1:numFrames
         timeFrame = timeFrames(index);
@@ -29,42 +29,42 @@ for directory = 1:8
         datadir = sprintf('%s%s%s%s',rootdir(1+37*(directory-1)),rootdir(2+37*(directory-1)),rootdir(10+37*(directory-1)),rootdir(11+37*(directory-1)));
         datatime = sprintf('T%d', timeFrames(index));
 
-        data3.(datadir).(datatime).DesiredJointVelocity = load(fullfile(dirFormat, sprintf('%s_desiredJointVelocity.csv',  dirFormat(15:end))));
-        data3.(datadir).(datatime).DesiredJointPosition = load(fullfile(dirFormat, sprintf('%s_desiredJointPosition.csv', dirFormat(15:end))));
-        data3.(datadir).(datatime).JointPosition = load(fullfile(dirFormat, sprintf('%s_jointPosition.csv', dirFormat(15:end))));
-        data3.(datadir).(datatime).JointVelocity = load(fullfile(dirFormat, sprintf('%s_jointVelocity.csv', dirFormat(15:end))));
-        data3.(datadir).(datatime).Time = load(fullfile(dirFormat, sprintf('%s_simulationTime.csv', dirFormat(15:end))));
-        data3.(datadir).(datatime).Force = load(fullfile(dirFormat, sprintf('%s_wrench.csv', dirFormat(15:end))));
-        data3.(datadir).(datatime).xDes = zeros(length(data3.(datadir).(datatime).Time), 3);
-        data3.(datadir).(datatime).xdDes = load(fullfile(dirFormat, sprintf('%s_desiredEndEffectorVelocity.csv',  dirFormat(15:end))));
-        data3.(datadir).(datatime).xAct = zeros(length(data3.(datadir).(datatime).Time), 3);
-        data3.(datadir).(datatime).xdAct = zeros(length(data3.(datadir).(datatime).Time), 3);
-        data3.(datadir).(datatime).xRec = zeros(length(data3.(datadir).(datatime).Time), 3);
-        data3.(datadir).(datatime).xdRec = zeros(length(data3.(datadir).(datatime).Time), 3);
+        data.(datadir).(datatime).DesiredJointVelocity = load(fullfile(dirFormat, sprintf('%s_desiredJointVelocity.csv',  dirFormat(15:end))));
+        data.(datadir).(datatime).DesiredJointPosition = load(fullfile(dirFormat, sprintf('%s_desiredJointPosition.csv', dirFormat(15:end))));
+        data.(datadir).(datatime).JointPosition = load(fullfile(dirFormat, sprintf('%s_jointPosition.csv', dirFormat(15:end))));
+        data.(datadir).(datatime).JointVelocity = load(fullfile(dirFormat, sprintf('%s_jointVelocity.csv', dirFormat(15:end))));
+        data.(datadir).(datatime).Time = load(fullfile(dirFormat, sprintf('%s_simulationTime.csv', dirFormat(15:end))));
+        data.(datadir).(datatime).Force = load(fullfile(dirFormat, sprintf('%s_wrench.csv', dirFormat(15:end))));
+        data.(datadir).(datatime).xDes = zeros(length(data.(datadir).(datatime).Time), 3);
+        data.(datadir).(datatime).xdDes = load(fullfile(dirFormat, sprintf('%s_desiredEndEffectorVelocity.csv',  dirFormat(15:end))));
+        data.(datadir).(datatime).xAct = zeros(length(data.(datadir).(datatime).Time), 3);
+        data.(datadir).(datatime).xdAct = zeros(length(data.(datadir).(datatime).Time), 3);
+        data.(datadir).(datatime).xRec = zeros(length(data.(datadir).(datatime).Time), 3);
+        data.(datadir).(datatime).xdRec = zeros(length(data.(datadir).(datatime).Time), 3);
 
-        for i = 1:length(data3.(datadir).(datatime).Time)
+        for i = 1:length(data.(datadir).(datatime).Time)
 
-            [data3.(datadir).(datatime).xAct(i, :), ~] = forwardKinematics(data3.(datadir).(datatime).JointPosition(i, :));
-            [data3.(datadir).(datatime).xDes(i, :), ~] = forwardKinematics(data3.(datadir).(datatime).DesiredJointPosition(i,:));
+            [data.(datadir).(datatime).xAct(i, :), ~] = forwardKinematics(data.(datadir).(datatime).JointPosition(i, :));
+            [data.(datadir).(datatime).xDes(i, :), ~] = forwardKinematics(data.(datadir).(datatime).DesiredJointPosition(i,:));
             
         end
-        temp = data3.(datadir).(datatime).xAct(:, 1);
-        data3.(datadir).(datatime).xAct(:, 1) = data3.(datadir).(datatime).xAct(:, 3);
-        data3.(datadir).(datatime).xAct(:, 3) = -temp;
-        temp = data3.(datadir).(datatime).xDes(:, 1);
-        data3.(datadir).(datatime).xDes(:, 1) = data3.(datadir).(datatime).xDes(:, 3);
-        data3.(datadir).(datatime).xDes(:, 3) = -temp;
+        temp = data.(datadir).(datatime).xAct(:, 1);
+        data.(datadir).(datatime).xAct(:, 1) = data.(datadir).(datatime).xAct(:, 3);
+        data.(datadir).(datatime).xAct(:, 3) = -temp;
+        temp = data.(datadir).(datatime).xDes(:, 1);
+        data.(datadir).(datatime).xDes(:, 1) = data.(datadir).(datatime).xDes(:, 3);
+        data.(datadir).(datatime).xDes(:, 3) = -temp;
         
-        for i = 1:length(data3.(datadir).(datatime).xAct) - 1
-            data3.(datadir).(datatime).xdAct(i, :) = (data3.(datadir).(datatime).xAct(i + 1, :) - data3.(datadir).(datatime).xAct(i, :)) /...
-                (data3.(datadir).(datatime).Time(i + 1) - data3.(datadir).(datatime).Time(i));
+        for i = 1:length(data.(datadir).(datatime).xAct) - 1
+            data.(datadir).(datatime).xdAct(i, :) = (data.(datadir).(datatime).xAct(i + 1, :) - data.(datadir).(datatime).xAct(i, :)) /...
+                (data.(datadir).(datatime).Time(i + 1) - data.(datadir).(datatime).Time(i));
         end
 
         % Calculate desired path and derivatives
         radius = 0.06;
         line_length = 0.2;
         alpha = (2 * line_length) / (radius * pi) + 1;
-        sspace = linspace(0, alpha + 1, length(data3.(datadir).(datatime).Time));
+        sspace = linspace(0, alpha + 1, length(data.(datadir).(datatime).Time));
 
         P_z = zeros(1, length(sspace));
         P_x = zeros(1, length(sspace));
