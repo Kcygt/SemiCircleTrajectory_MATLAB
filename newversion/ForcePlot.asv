@@ -173,10 +173,10 @@ figure(10)
 hold on; grid on;
 
 % Combine the data into a single matrix
-allData = [-data.FC60.T10.Force(3000:5000,1); -data.FC60.T6.Force(2000:3500,1); -data.FC60.T3.Force(1000:1400,1)];
+allData = [-data.FC60.T10.Force(2200:5000,1); -data.FC60.T6.Force(2000:3500,1); -data.FC60.T3.Force(1000:1400,1)];
 
 % Create a grouping variable
-groupLabels = repelem({'slow', 'middle', 'fast'}, [numel(data.FC60.T10.Force(3000:5000,1)), numel(data.FC60.T6.Force(2000:3500,1)), numel(data.FC60.T3.Force(1000:1400,1))]);
+groupLabels = repelem({'slow', 'middle', 'fast'}, [numel(data.FC60.T10.Force(2200:5000,1)), numel(data.FC60.T6.Force(2000:3500,1)), numel(data.FC60.T3.Force(1000:1400,1))]);
 
 % Plot the boxplot with labels
 boxplot(allData, groupLabels, 'Labels', {'slow', 'middle', 'fast'})
