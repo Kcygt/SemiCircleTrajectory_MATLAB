@@ -1,5 +1,4 @@
-
-|    Journals          |       Imprint      |  Impact Factor  | 
+| Data File Name | Data Origin|
 | -------------------- | ------------------ |  -------------  |
 | Journal of Robotics  |        Hindawi     |       1.8       |
 |   Advanced Robotics  |   Taylor & Francis |       2.6       |
