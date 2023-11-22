@@ -11,3 +11,14 @@
 | International Journal of Intelligent Robotics and Applications  | Springer  |       1.7       |
 |  Robotics        |         MDPI       |       3.7        |
 |   Advanced Robotics  |   Taylor & Francis |       1.7      |
+
+
+| Data File Name | Data Origin|
+| -------------------- | ------------------ |  -------------  |
+| desiredEndEffectorPosition | |
+|desiredEndEffectorVelocity|
+|desiredJointPosition| 
+|desiredJointVelocity| 
+|jointPosition|Kinova|
+|jointVelocity|Kinova |
+|wrench|
