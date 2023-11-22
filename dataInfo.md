@@ -2,7 +2,7 @@
 
 | Data File Name | Data Origin|
 | -------------------- | ------------------ |  
-| DesiredEndEffectorPosition | |
+| DesiredEndEffectorPosition | Hippodrome Function|
 | DesiredEndEffectorVelocity |
 | DesiredJointPosition | |
 | DesiredJointVelocity | 
