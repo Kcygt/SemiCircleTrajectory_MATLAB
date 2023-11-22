@@ -1,4 +1,4 @@
-| Data File Name | Data Origin|
+|    Journals          |       Imprint      |  Impact Factor  | 
 | -------------------- | ------------------ |  -------------  |
 | Journal of Robotics  |        Hindawi     |       1.8       |
 |   Advanced Robotics  |   Taylor & Francis |       2.6       |
@@ -11,7 +11,6 @@
 | International Journal of Intelligent Robotics and Applications  | Springer  |       1.7       |
 |  Robotics        |         MDPI       |       3.7        |
 |   Advanced Robotics  |   Taylor & Francis |       1.7      |
-
 
 | Data File Name | Data Origin|
 | -------------------- | ------------------ |  -------------  |
