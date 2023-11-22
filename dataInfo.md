@@ -1,11 +1,11 @@
 
 
-| Data File Name | Data Origin||
-| -------------------- | ------------------ |  -------------  |
-| desiredEndEffectorPosition | |
-|desiredEndEffectorVelocity|
-|desiredJointPosition| 
-|desiredJointVelocity| 
-|jointPosition|Kinova|
-|jointVelocity|Kinova |
-|wrench|
+| Data File Name | Data Origin|
+| -------------------- | ------------------ |  
+| DesiredEndEffectorPosition | |
+| DesiredEndEffectorVelocity |
+| DesiredJointPosition | |
+| DesiredJointVelocity | 
+| JointPosition | Kinova |
+| JointVelocity | Kinova |
+| Wrench |
