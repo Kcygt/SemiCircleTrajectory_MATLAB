@@ -3,9 +3,9 @@
 | Data File Name | Data Origin|
 | -------------------- | ------------------ |  
 | DesiredEndEffectorPosition | Hippodrome Function|
-| DesiredEndEffectorVelocity |
-| DesiredJointPosition | |
-| DesiredJointVelocity | 
+| DesiredEndEffectorVelocity | Hippodrome Function|
+| DesiredJointPosition | Inverse Kinematics |
+| DesiredJointVelocity |  Inverse Kinematics |
 | JointPosition | Kinova |
 | JointVelocity | Kinova |
-| Wrench |
+| Wrench | Force Sensor|
