@@ -1,15 +1,12 @@
-% %%% Sine wave
-% %%Time specifications:
-% Fs = 1000;                   % samples per second
-% dt = 1/Fs;                   % seconds per sample
-% StopTime = 0.25;             % seconds
-% t = (0:dt:StopTime-dt)';     % seconds
-% %%Sine wave:
-% Fc = 60;                     % hertz
-% x = cos(2*pi*Fc*t);
-
-%%%
+%Input Generation
 Ts = 0.001;
+t = 0:Ts:0.6;
+u = zeros(size(t));
+u(t < 0.3) = 0;
+u((t >= 0.3) & (t < 0.4)) = linspace(0, 0.001, sum((t >= 0.3) & (t < 0.4)));
+u(t >= 0.4) = 0.001;
+
+% Desing Controller
 
 % Define the numerator and denominator of the systems
 plant_num = [8.331499999999999e-04 -0.002411635990000 0.001646764298800 0.001386774757085 -0.002226794738657 7.735179924151595e-04 ];
@@ -27,7 +24,10 @@ feedback_tf = tf(feedback_num,feedback_den,Ts);
 filter_tf = tf(filter_num,filter_den,Ts);
 feedforward_tf = filter_tf / plant_tf;
 
-system_tf = plant_tf * feedback_tf / feedforward_tf ;
+
+system_tf = feedback(plant_tf * feedback_tf,1);
+lsim(system_tf,u,t)
+
 % %%
 % sysd = plant_tf;
 % % sysd = c2d(sysc,Ts,'ZOH');
@@ -81,8 +81,3 @@ system_tf = plant_tf * feedback_tf / feedforward_tf ;
 %     disp(Ej)
 %     plotter(ii,t,Ej,Yj,Uj,Rj,U)
 % end
-
-syms z
-
-Cn = 12.3359 * ( z  - 0.9874) * ( z - 0.9577 )* (z - 0.945);
-Cd = (z - 0.9991) * (z-0.9174) * (z- 0.9164);

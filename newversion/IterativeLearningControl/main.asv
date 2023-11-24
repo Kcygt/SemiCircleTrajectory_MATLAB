@@ -1,30 +1,31 @@
-% %%% Sine wave
-% %%Time specifications:
-% Fs = 1000;                   % samples per second
-% dt = 1/Fs;                   % seconds per sample
-% StopTime = 0.25;             % seconds
-% t = (0:dt:StopTime-dt)';     % seconds
-% %%Sine wave:
-% Fc = 60;                     % hertz
-% x = cos(2*pi*Fc*t);
-
-%%%
+%Input Generation
 Ts = 0.001;
+t = 0:Ts:0.6;
+u = zeros(size(t));
+u(t < 0.3) = 0;
+u((t >= 0.3) & (t < 0.4)) = linspace(0, 0.001, sum((t >= 0.3) & (t < 0.4)));
+u(t >= 0.4) = 0.001;
 
 % Define the numerator and denominator of the systems
-plant_num = [8.331499999999999e-04 -0.002411635990000 0.001646764298800 0.001386774757085 -0.002226794738657 7.735179924151595e-04 ];
+plant_num = [8.3315e-04 -0.002411636 0.0016467642988 0.001386774757085 -0.002226794738657 7.735179924151595e-04 ];
 plant_den =  [1 -5.7154 13.723534400000000 -17.734220581599999 13.016931722320001  -5.148338416112000 0.857492875392000];
+
 feedback_num = [12.33590000000000 -35.651984590000005 34.340092218032005  -11.023646014692989];
-feedback_den = [1  -2.8248 2.65800116 -0.833139011760000];
+feedback_den = [1    -2.832900000000000    2.672854940000000    -0.839948725176000];
+
 filter_num = [0.1568 0.126898240000000];
 filter_den = [1 -1.25 0.5335];
+
 % Calculate the transfer functions
 plant_tf = tf(plant_num,plant_den,Ts);
 feedback_tf = tf(feedback_num,feedback_den,Ts);
 filter_tf = tf(filter_num,filter_den,Ts);
 feedforward_tf = filter_tf / plant_tf;
 
-system_tf = plant_tf * feedback_tf / feedforward_tf ;
+
+system_tf = feedback(plant_tf,feedback_tf);
+lsim(system_tf,u,t)
+
 % %%
 % sysd = plant_tf;
 % % sysd = c2d(sysc,Ts,'ZOH');
@@ -78,23 +79,3 @@ system_tf = plant_tf * feedback_tf / feedforward_tf ;
 %     disp(Ej)
 %     plotter(ii,t,Ej,Yj,Uj,Rj,U)
 % end
-
-syms z
-
-Cn = 12.3359 * ( z  - 0.9874) * ( z - 0.9577 )* (z - 0.945);
-Cd = (z - 0.9991) * (z-0.9174) * (z- 0.9164);
-
-(6944494330409963)/562949953421312 
--(200702830643178340663)/5629499534213120000 + 
-(120823458216404211987239)/3518437208883200000000 
--62057610105044506470438543/5629499534213120000000000
-
-
-(z - 189/200)*(z - 9577/10000)*((6944494330409963*z)/562949953421312 - 34284968509233987331/2814749767106560000)
-(z - 2291/2500)*(z - 4587/5000)*(z - 9991/10000)
-
-
-(6944494330409963)/562949953421312 
--(200702830643178340663)/5629499534213120000 
-(120823458216404211987239)/3518437208883200000000 
--62057610105044506470438543/5629499534213120000000000
