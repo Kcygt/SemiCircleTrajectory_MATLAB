@@ -25,8 +25,45 @@ filter_tf = tf(filter_num,filter_den,Ts);
 feedforward_tf = filter_tf / plant_tf;
 
 
-system_tf = feedback(plant_tf * feedback_tf,1);
-lsim(system_tf,u,t)
+feedback_tf.InputName = "e";
+feedback_tf.OutputName = "uc";
+
+% feedforward_tf.InputName = "r";
+% feedforward_tf.OutputName = "uf";
+
+plant_tf.InputName = "u";
+plant_tf.OutputName ="y";
+
+filter_tf.InputName = "v";
+filter_tf.OutputName = "w";
+
+L = 0.95;
+Q = 1;
+
+S1 = sumblk("e = r - y");
+% S2 = sumblk("u = uf + uc");
+S2 = sumblk("w = uc + Q * ((e * L) + u)");
+% S3 = sumblk("w = Q * ((e * L) + u)");
+
+% hold on;
+% feedback_result = feedback(plant_tf * feedback_tf,1);
+% lsim(feedback_result,u,t)
+% 
+% feedforward_result =  connect(plant_tf,feedback_tf,feedforward_tf,S1,S2,"r","y");
+% lsim(feedforward_result,u,t)
+
+ILC_result =  connect(plant_tf,feedback_tf,S1,S2,"r","y");
+lsim(ILC_result,u,t)
+
+
+
+
+
+
+
+
+
+
 
 % %%
 % sysd = plant_tf;
