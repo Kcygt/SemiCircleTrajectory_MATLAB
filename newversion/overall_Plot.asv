@@ -96,7 +96,7 @@ g2 = repmat({'0.05'},2301,1);
 g3 = repmat({'0.1'},801,1);
 xlabel("Avarage Velocity(m/s)")
 ylabel("Friction Force (N)")
-title("Low Penetration -  Friction Force")
+title("Low Penetration ")
 g = [g1; g2; g3];
 boxplot(x,g,'Notch','on','Labels',{'0.03','0.05','0.1'})
 
@@ -113,7 +113,7 @@ g2 = repmat({'0.05'},2201,1);
 g3 = repmat({'0.1'},601,1);
 xlabel("Avarage Velocity(m/s)")
 ylabel("Friction Force (N)")
-title("Medium Penetration - Friction Force ")
+title("Medium Penetration ")
 g = [g1; g2; g3];
 boxplot(x,g,'Notch','on','Labels',{'0.03','0.05','0.1'})
 
@@ -131,7 +131,7 @@ g2 = repmat({'0.05'},1601,1);
 g3 = repmat({'0.1'},401,1);
 xlabel("Avarage Velocity(m/s)")
 ylabel("Friction Force (N)")
-title("High Penetration - Friction Force ")
+title("High Penetration ")
 g = [g1; g2; g3];
 boxplot(x,g,'Notch','on','Labels',{'0.03','0.05','0.1'})
 
@@ -140,9 +140,9 @@ boxplot(x,g,'Notch','on','Labels',{'0.03','0.05','0.1'})
 %%% Boxplot for Normal force
 figure(8)
 hold on; grid on;
-x1 = -data1.FC50.T10.Force(2400:6500,3);
-x2 = -data1.FC50.T6.Force(1600:3900,3);
-x3 = -data1.FC50.T3.Force(1000:1800,3);
+x1 = -data1.FC50.T10.Force(2400:6500,1);
+x2 = -data1.FC50.T6.Force(1600:3900,1);
+x3 = -data1.FC50.T3.Force(1000:1800,1);
 x = [x1;x2;x3];
 
 g1 = repmat({'0.03'},4101,1);
@@ -155,11 +155,11 @@ g = [g1; g2; g3];
 boxplot(x,g,'Notch','on','Labels',{'0.03','0.05','0.1'})
 
 
-figure(9)
+figure(6)
 hold on; grid on;
-x1 = -data1.FC55.T10.Force(2400:6500,3);
-x2 = -data1.FC55.T6.Force(1800:4000,3);
-x3 = -data1.FC55.T3.Force(1100:1700,3);
+x1 = -data1.FC55.T10.Force(2400:6500,1);
+x2 = -data1.FC55.T6.Force(1800:4000,1);
+x3 = -data1.FC55.T3.Force(1100:1700,1);
 x = [x1;x2;x3];
 
 g1 = repmat({'0.03'},4101,1);
@@ -167,17 +167,17 @@ g2 = repmat({'0.05'},2201,1);
 g3 = repmat({'0.1'},601,1);
 xlabel("Avarage Velocity(m/s)")
 ylabel("Normal Force (N)")
-title("Medium Penetration - Normal Force")
+title("Medium Penetration ")
 g = [g1; g2; g3];
 boxplot(x,g,'Notch','on','Labels',{'0.03','0.05','0.1'})
 
 
 
-figure(10)
+figure(7)
 hold on; grid on;
-x1 = -data1.FC60.T10.Force(2000:4500,3);
-x2 = -data1.FC60.T6.Force(1700:3300,3);
-x3 = -data1.FC60.T3.Force(900:1300,3);
+x1 = -data1.FC60.T10.Force(2000:4500,1);
+x2 = -data1.FC60.T6.Force(1700:3300,1);
+x3 = -data1.FC60.T3.Force(900:1300,1);
 x = [x1;x2;x3];
 
 g1 = repmat({'0.03'},2501,1);
@@ -185,6 +185,6 @@ g2 = repmat({'0.05'},1601,1);
 g3 = repmat({'0.1'},401,1);
 xlabel("Avarage Velocity(m/s)")
 ylabel("Normal Force (N)")
-title("High Penetration - Normal Force")
+title("High Penetration ")
 g = [g1; g2; g3];
 boxplot(x,g,'Notch','on','Labels',{'0.03','0.05','0.1'})

@@ -1,61 +1,58 @@
 %%%% FEEDBACK SYSTEM
 %Input Generation
+close all
+clear all
 Ts = 0.001;
-t = 0:Ts:0.6;
+t = 0:Ts:10;
 Rj = zeros(size(t));
-Rj(t < 0.3) = 0;
+Rj(t < 0.3) = 1;
 Rj((t >= 0.3) & (t < 0.4)) = linspace(0, 1, sum((t >= 0.3) & (t < 0.4)));
 Rj(t >= 0.4) = 1;
-
-
-% Define the numerator and denominator of the systems
+% Define the numerator and denominator of the systems and Tranfer Function
 plant_num = [8.331499999999999e-04 -0.002411635990000 0.001646764298800 0.001386774757085 -0.002226794738657 7.735179924151595e-04 ];
 plant_den =  [1 -5.7154 13.723534400000000 -17.734220581599999 13.016931722320001  -5.148338416112000 0.857492875392000];
+plant_tf = tf(plant_num,plant_den,Ts);
 
+% Define the numerator and denominator of the Feedback controller and Tranfer Function
 feedback_num = [12.33590000000000 -35.651984590000005 34.340092218032005  -11.023646014692989];
 feedback_den = [1    -2.832900000000000    2.672854940000000    -0.839948725176000];
-
-filter_num = [0.1568 0.126898240000000];
-filter_den = [1 -1.25 0.5335];
-
-% Calculate the transfer functions
-plant_tf = tf(plant_num,plant_den,Ts);
 fback_tf = tf(feedback_num,feedback_den,Ts);
-filter_tf = tf(filter_num,filter_den,Ts);
-fforward_tf = filter_tf / plant_tf;
+
+% % Define the numerator and denominator of the Filter and feedforward and Tranfer Function
+% filter_num = [0.1568 0.126898240000000];
+% filter_den = [1 -1.25 0.5335];
+% filter_tf = tf(filter_num,filter_den,Ts);
+% fforward_tf = filter_tf / plant_tf;
 
 
-fback_tf.InputName = "e";
-fback_tf.OutputName = "u";
+% fback_tf.InputName = "e";
+% fback_tf.OutputName = "u";
+% plant_tf.InputName = "u";
+% plant_tf.OutputName = "y";
+% S1 = sumblk("e = r - y");
+% system_feedback = connect(plant_tf,fback_tf,S1,"r","y");
+%%% For loop
+N = 1/Ts;
+y = zeros(N,1);
+Err = zeros(N,1);
+U = zeros(N,1);
 
-plant_tf.InputName = "u";
-plant_tf.OutputName = "y";
+for i=2:1/Ts
+   Err(i) = Rj(i)- y(i-1);
+   y(i) = lsim(fback_tf * plant_tf,Err(i),Ts);
 
-S1 = sumblk("e = r - y");
-
-system_feedback = connect(plant_tf,fback_tf,S1,"r","y");
-
-
-
-%%% FEEDFORWARD SYSTEM
-
-fback_tf.InputName = "e";
-fback_tf.OutputName = "uc";
-
-fforward_tf.InputName = "r";
-fforward_tf.OutputName = "uf";
-
-plant_tf.InputName = "u";
-plant_tf.OutputName = "y";
-
-S1 = sumblk("e = r - y");
-S2 = sumblk("u = uf + uc");
-
-system_feedforward = connect(plant_tf,fback_tf,fforward_tf, S1,S2,"r","y");
-
-hold on;
-lsim(system_feedback,Rj,t)
-lsim(system_feedforward,Rj,t)
-legend("Feedback","Feedback + Feedforward")
-
-
+end
+% %%% FEEDFORWARD SYSTEM
+% fback_tf.InputName = "e";
+% fback_tf.OutputName = "uc";
+% fforward_tf.InputName = "r";
+% fforward_tf.OutputName = "uf";
+% plant_tf.InputName = "u";
+% plant_tf.OutputName = "y";
+% S1 = sumblk("e = r - y");
+% S2 = sumblk("u = uf + uc");
+% system_feedforward = connect(plant_tf,fback_tf,fforward_tf, S1,S2,"r","y");
+% hold on;
+% lsim(system_feedback,Rj,t)
+% lsim(system_feedforward,Rj,t)
+% legend("Feedback","Feedback + Feedforward")

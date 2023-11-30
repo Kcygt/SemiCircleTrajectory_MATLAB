@@ -13,12 +13,13 @@ function [] = plotter(ii,t,Ej,Yj,Uj,Rj,U)
   title({['Iteration: ', num2str(ii)],'Input, Uj'},'FontSize',16);
   xlabel('Time (s)','FontSize',16);
   ylabel('Input Response','FontSize',16);
-  ylim([0 7])
+  ylim([-2 7])
   % Plot the output Yj of the current itteration
   subplot(1,3,3);
   plot(t,Yj,t,Rj,'-k','LineWidth',1.5);
   title('Output, Yj','FontSize',16);
   ylabel('Output Response','FontSize',16);
-  ylim([0 7])
-  pause(0.5);
+  ylim([-2 7])
+%   pause(0.01);
+  %input('q')
 end
