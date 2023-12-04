@@ -2,9 +2,9 @@
 close all
 clear all
 clc
-Ts = 0.01;
+Ts = 0.1;
 num = 100;
-den = [1 100 120];
+den = [1  120];
 sysc = tf(num,den);
 sysd = c2d(sysc,Ts,'ZOH');
 
@@ -20,7 +20,7 @@ system_fback = feedback(plant_tf * fback_tf,1);
 
 
 % Get state space values for ILC
-[Ad, Bd, Cd, Dd] = ssdata(plant_tf);
+[Ad, Bd, Cd, Dd] = ssdata(sysd);
 
 % Initial condition x0, time range t - assume 1 second, pure time delay n0, relative
 % degree r, and matrix size N
@@ -50,7 +50,7 @@ for ii = 1:length(rVec)
 end
 G = tril(toeplitz(Gvec));
 % Set up ILC
-jmax = 50;
+jmax = 5;
 
 l0 = 0.95; L = l0 * eye(N,N);
 q0 = 1.00; Q = q0 * eye(N,N);
