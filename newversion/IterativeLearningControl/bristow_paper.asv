@@ -24,8 +24,8 @@ filter_den = [1 -1.25 0.5335];
 filter_tf = tf(filter_num,filter_den,Ts);
 fforward_tf = filter_tf / plant_tf;
 [fforward_num,fforward_den] = tfdata(fforward_tf);
-fforward_num = fforward_num{1};
-fforward_den = fforward_den{1}; 
+fforward_num = fforward_num{1}
+fforward_den
 fback_tf.InputName = "e";
 fback_tf.OutputName = "u";
 plant_tf.InputName = "u";

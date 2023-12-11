@@ -2,9 +2,9 @@
 close all
 clear all
 clc
-Ts = 0.1;
+Ts = 0.03;
 num = 100;
-den = [1  120];
+den = [1 120];
 sysc = tf(num,den);
 sysd = c2d(sysc,Ts,'ZOH');
 
@@ -29,14 +29,8 @@ t = 0:Ts:0.6;
 n0 = 0;
 r = 1;
 N = length(t);
+
 % Define input vector U and reference J - Refernce = input for this example
-% Rj = [0*ones(1,(N-1)/5) 1*ones(1,(N-1)/5) 1*ones(1,(N-1)/5) 1*ones(1,(N-1)/5) 0*ones(1,(N-1)/5+1)]';
-
-% Rj = zeros(size(t))';
-% Rj(t < 0.3) = 0;
-% Rj((t >= 0.3) & (t < 0.4)) = linspace(0, 1, sum((t >= 0.3) & (t < 0.4)));
-% Rj(t >= 0.4) = 1;
-
 Rj= sin(20*t');
 U = Rj;
 % G0 not formulated as initial condition is 0
@@ -50,7 +44,7 @@ for ii = 1:length(rVec)
 end
 G = tril(toeplitz(Gvec));
 % Set up ILC
-jmax = 5;
+jmax = 20;
 
 l0 = 0.95; L = l0 * eye(N,N);
 q0 = 1.00; Q = q0 * eye(N,N);
@@ -60,7 +54,7 @@ Ej = zeros(N,1); Ejold = Ej;
 
 % Run ILC and plot the response for each iteration
 for ii = 1:jmax
-    Uj = Q*Ujold + L*Ejold;
+    Uj = Q*(Ujold + L*Ejold);
     Yj = G*Uj;
     Ej = Rj - Yj; Ej(1) = 0;
     Ejold = Ej;

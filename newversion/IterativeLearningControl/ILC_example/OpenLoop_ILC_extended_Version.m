@@ -2,13 +2,11 @@
 close all
 clear all
 clc
-Ts = 0.03;
+Ts = 0.01;
 num = 100;
 den = [1  120];
 sysc = tf(num,den);
 sysd = c2d(sysc,Ts,'ZOH');
-
-
 
 
 % Get state space values for ILC
@@ -28,7 +26,7 @@ U = Rj;
 
 
 % Set up ILC
-jmax = 5;
+jmax = 10;
 
 l0 = 0.95; L = l0 * eye(N,N);
 q0 = 1.00; Q = q0 * eye(N,N);
@@ -53,7 +51,7 @@ G = toeplitz(Gvec);
 % Run ILC and plot the response for each iteration
 for ii = 1:jmax
     for jj = 1:length(rVec)
-        Uj(jj) = q0*Ujold(jj) + l0*Ejold(jj);
+        Uj(jj) = q0*(Ujold(jj) + l0*Ejold(jj));
         
         for xx=1:jj
             Yj(xx) = G(xx,:) * Uj;

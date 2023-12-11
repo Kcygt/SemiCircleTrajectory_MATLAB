@@ -19,6 +19,6 @@ function [] = plotter(ii,t,Ej,Yj,Uj,Rj,U)
   title('Output, Yj','FontSize',16);
   ylabel('Output Response','FontSize',16);
   ylim([-2 7])
-  pause(1);
+  % pause(1);
   %input('q')
 end
